@@ -1,0 +1,19 @@
+Options FollowSymLinks
+ 
+php_flag zlib.output_compression On
+php_value zlib.output_compression_level 5
+ 
+RewriteEngine on
+RewriteBase /dropbox/html/
+ 
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^image/([^/]*)/?(dummy.jpg)?$ image.php?mode=image&id=$1 [L,QSA]
+ 
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^thumb/([^/]*)/?(.*)?$ image.php?mode=thumb&id=$1&args=$2 [L,QSA]
+ 
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)/?$ index.php?args=$1 [L,QSA]
